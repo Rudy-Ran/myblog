@@ -70,5 +70,53 @@ title: 什么是BFC？
   float: left;
 }
 ```
-<!-- 父元素里面包了一个子元素，子元素浮动，此时-->
 ![父元素里面包了一个子元素，子元素浮动](../../images/1.png)
+
+可以看到，父元素里面包含了一个子元素，在子元素浮动的情况下，脱离文档流，父元素高度不会被子元素撑开，这是如果我们需要让父元素被浮动的子元素撑开，根据BFC布局规则 **计算BFC的高度时，浮动元素也参与计算**，我们让父级元素生成一个BFC，则父元素内的子元素也会计算高度
+可以通过以下方式生成一个BFC：
+```
+.parents:{
+  /*overflow: hidden;*/
+  /*float: left;*/
+  /*display: inline-block;*/
+  /*position: absolute;*/
+  }`
+```
+![清除浮动后](../../images/2.png)
+具体请参照上面BFC的创建。
+
+### 解决外边距塌陷
+**HTML**
+```
+<div class="div"></div>
+<div class="div"></div>
+```
+**CSS**
+```
+.div{
+  border: 1px solid red;
+  width: 50px;
+  height: 50px;
+  margin: 50px 0;
+  background-color: pink;
+}
+```
+页面显示如下
+<!-- 父元素里面包了一个子元素，子元素浮动-->
+![外边距发生塌陷](../../images/3.png)
+所谓的外边距塌陷是指：块级元素的上下外边距有时候会合并，合并后的外边距等于合并前两个外边距中的较大值，这种现象称为外边距塌陷
+解决外边距塌陷，我们可以根据 **Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠** 因此，我们可以让两个p标签属于不同的BFC，则他们之间就不会发生外边距的塌陷问题
+方式如下：
+```
+<div class="div"></div>
+<div class="wrap">
+  <div class="div"></div>
+</div>
+
+.wrap{
+  overflow: hidden;
+}
+```
+效果如下：
+![塌陷解决](../../images/4.png)
+**BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此**
