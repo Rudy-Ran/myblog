@@ -39,7 +39,7 @@ post_asset_folder: true
 relative_link: false
 future: true
 highlight:
-  enable: true
+  enable: false
   line_number: true
   auto_detect: false
   tab_replace:
@@ -81,3 +81,9 @@ deploy:
   type: git
   repository: git@github.com:Rudy-Ran/Rudy-Ran.github.io.git
   branch: master
+#Plugin
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'atom-dark'
+  line_number: true    # default false
+  custom_css: 'path/to/your/custom.css'     # optional

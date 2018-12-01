@@ -5,7 +5,7 @@ title: 什么是BFC？
 
 那么到底什么是BFC呢？
 
-在CSS的[官方文档](https://www.w3.org/TR/CSS21/visuren.html#block-formatting)的说明中 **BFC**:全称 *Block formatting contexts*，直译过来就是块级格式化上下文。讲到这里你可能还是一头雾水，我们这里先停下来讲几个基本的概念以便有助于你接下来的理解。
+在CSS的[官方文档](https://www.w3.org/TR/CSS21/visuren.html#block-formatting)的说明中，**BFC**:全称 *Block formatting contexts*，直译过来就是块级格式化上下文。讲到这里你可能还是一头雾水，我们这里先停下来讲几个基本的概念以便有助于你接下来的理解。
 
 #### Formatting Context
 **Formatting Context** 格式化上下文，它是指页面中一块独立的渲染区域，这块区域有自己独立的渲染规则，规则取决于这块区域的Box属性。
@@ -58,7 +58,7 @@ title: 什么是BFC？
 </div>
 ```
 **CSS**
-```
+```CSS
 .parents{
   width: 300px;
   background-color: blue;
@@ -74,7 +74,7 @@ title: 什么是BFC？
 
 可以看到，父元素里面包含了一个子元素，在子元素浮动的情况下，脱离文档流，父元素高度不会被子元素撑开，这是如果我们需要让父元素被浮动的子元素撑开，根据BFC布局规则 **计算BFC的高度时，浮动元素也参与计算**，我们让父级元素生成一个BFC，则父元素内的子元素也会计算高度
 可以通过以下方式生成一个BFC：
-```
+```CSS
 .parents:{
   /*overflow: hidden;*/
   /*float: left;*/
@@ -87,12 +87,12 @@ title: 什么是BFC？
 
 ### 解决外边距塌陷
 **HTML**
-```
+```HTML
 <div class="div"></div>
 <div class="div"></div>
 ```
 **CSS**
-```
+```CSS
 .div{
   border: 1px solid red;
   width: 50px;
@@ -107,12 +107,13 @@ title: 什么是BFC？
 所谓的外边距塌陷是指：块级元素的上下外边距有时候会合并，合并后的外边距等于合并前两个外边距中的较大值，这种现象称为外边距塌陷
 解决外边距塌陷，我们可以根据 **Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠** 因此，我们可以让两个p标签属于不同的BFC，则他们之间就不会发生外边距的塌陷问题
 方式如下：
-```
+```HTML
 <div class="div"></div>
 <div class="wrap">
   <div class="div"></div>
 </div>
-
+```
+```CSS
 .wrap{
   overflow: hidden;
 }

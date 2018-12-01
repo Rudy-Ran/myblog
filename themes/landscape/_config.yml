@@ -35,3 +35,9 @@ twitter:
 google_plus:
 fb_admins:
 fb_app_id:
+#lugin
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'atom-dark'
+  line_number: true    # default false
+  custom_css: 'path/to/your/custom.css'     # optional
